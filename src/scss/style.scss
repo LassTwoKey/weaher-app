@@ -1,0 +1,98 @@
+// <CONNECTING FONTS>=============================================================
+
+// <CONNECTING FONTS>=============================================================
+
+// <DEFAULT FONT>=============================================================
+$fontFamily: "Open Sans";
+$fontSecond: "Inter";
+$fontSize: 16;
+$fontWeight: 500;
+// <DEFAULT FONT>=============================================================
+
+// <VARIABLES>=====================================================================
+$maxWidthContainer: 1280;
+$md1: 1023.98;
+$md2: 767.98;
+$md3: 479.98;
+
+$backgroundColor: #ECEEF2;
+$mainColor: #393939;
+$pramaryColor: linear-gradient(180deg, rgba(218,114,138,1) 0%, rgba(207,97,161,1) 100%);
+$secondaryColor: #FFEDF3;
+$commonText: #828282;
+$white: #fff;
+$turquoise: #1FBDE0;
+$blue: #3272EE;
+$yellow: #3272EE;
+$dark-blue: #3272EE;
+$crimson: #ED6A6A;
+$orange: #ED6A6A;
+$gray: #ECEEF2;
+
+$boxShadow: 0 0 2px rgba(#000, 0.25);
+
+// <VARIABLES>=====================================================================
+
+// <RESET, GENERAL PARAMETERS>=====================================================
+@import "null";
+
+body {
+    height: 100%;
+    font-family: $fontFamily;
+    font-weight: $fontWeight;
+    color: $mainColor;
+    font-size: $fontSize;
+    line-height: 150%;
+    background-color: $backgroundColor;
+    &._lock {
+        overflow: hidden;
+    }
+}
+// <RESET, GENERAL PARAMETERS>======================================================
+
+// <SHELL>========================================================================
+.wrapper {
+    min-height: 100%;
+    overflow: clip;
+    display: flex;
+    flex-direction: column;
+}
+// <SHELL>========================================================================
+
+// <MAIN GRID>==================================================================
+[class*="__container"] {
+    padding: 0 15px;
+    max-width: $maxWidthContainer + px;
+    margin: 0 auto;
+    box-sizing: content-box;
+}
+// <MAIN GRID>==================================================================
+
+// <GLOBAL STYLES>================================================================
+
+._ibg {
+    position: relative;
+}
+
+._ibg img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+
+// <GLOBAL STYLES>================================================================
+
+// <CONNECTING PAGE STYLES AND ELEMENTS>=============================================
+@import "header";
+@import "footer";
+// <CONNECTING PAGE STYLES AND ELEMENTS>=============================================
+
+// <MAIN BLOCK>======================================================================
+.main {
+    flex: 1 1 auto;
+}
+// <MAIN BLOCK>======================================================================
