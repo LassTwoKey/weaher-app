@@ -11,10 +11,11 @@ $fontWeight: 500;
 
 // <VARIABLES>=====================================================================
 $maxWidthContainer: 1280;
-$md1: 1023.98;
-$md2: 767.98;
-$md3: 479.98;
+$md1: 992.98px;
+$md2: 767.98px;
+$md3: 479.98px;
 
+$black:#000;
 $backgroundColor: #ECEEF2;
 $mainColor: #393939;
 $pramaryColor: linear-gradient(180deg, rgba(218,114,138,1) 0%, rgba(207,97,161,1) 100%);
@@ -27,9 +28,10 @@ $yellow: #3272EE;
 $dark-blue: #3272EE;
 $crimson: #ED6A6A;
 $orange: #ED6A6A;
-$gray: #ECEEF2;
+$grey: #ECEEF2;
 
 $boxShadow: 0 0 2px rgba(#000, 0.25);
+$border:6px;
 
 // <VARIABLES>=====================================================================
 
@@ -89,10 +91,15 @@ body {
 // <CONNECTING PAGE STYLES AND ELEMENTS>=============================================
 @import "header";
 @import "footer";
+@import "widget";
+@import "tabs";
+@import "sunrice-sunset";
+@import "five-days";
 // <CONNECTING PAGE STYLES AND ELEMENTS>=============================================
 
 // <MAIN BLOCK>======================================================================
 .main {
     flex: 1 1 auto;
-}
+    padding:30px 0px;
+} 
 // <MAIN BLOCK>======================================================================

@@ -1,0 +1,115 @@
+.widget {
+  position: relative;
+  height: 350px;
+  font-size: 17px;
+  border-radius: 20px;
+  font-weight: 600;
+  overflow: hidden;
+  flex: 0 0 500px;
+  & > img,
+  .backdrop {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+  }
+  &-wrapper {
+    display: flex;
+  }
+  .backdrop {
+    background-color: $black;
+    filter: blur(100%);
+    opacity: 40%;
+  }
+  &-city-country {
+    font-weight: 700;
+  }
+  &-header,
+  &-main,
+  &-footer {
+    position: relative;
+    z-index: 2;
+    color: $white;
+    display: flex;
+  }
+  &-footer {
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &-main {
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &-temperature {
+    display: flex;
+  }
+  &-read-gradus {
+    p {
+      transform: translateX(-22px);
+    }
+  }
+  &-weather-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  &-gradus {
+    p {
+      font-weight: 700;
+      font-size: 112px;
+      transform: translateY(-33px);
+    }
+  }
+  &-max-and-min-temp {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  &-container {
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+.neco-table {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+}
+.neco-title {
+  color: $mainColor;
+  font-size: 20px;
+  font-weight: 600;
+}
+.neco-desc {
+  font-size: 15px;
+  font-weight: 600;
+  color: $commonText;
+}
+
+@media (max-width: $md1) {
+  .neco-table {
+    display: none;
+  }
+.widget {
+  flex: 1 1 auto;
+  p {
+    font-size: 14px;
+  }
+}
+.widget-gradus {
+  p {
+    font-size: 96px;
+  }
+}
+}
