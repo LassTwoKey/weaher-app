@@ -1,18 +1,49 @@
+
+.full-days-card{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 .five-days{
     &-card{
         background-color: $white;
         max-width: 500px;
-        padding:14px 9px;
+        border-radius: 10px;
     }
+    &-data{
+        p{
+           color:$commonText;
+        }
+    }
+
     &-wrapper{
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 18px 9px;
     }
     &-content-weather{
         display: flex;
         align-items: center;
         gap:20px;
-        padding-right:30px;
+        padding-right:10px;
+    }
+    &-temperature{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    &-open{ 
+        transform: translateX(5px);
+    }
+}
+
+.active{
+    transform: rotate(178deg);
+}
+
+@media (max-width:$md1){
+    .five-days-data{
+        font-size: 14px;
     }
 }

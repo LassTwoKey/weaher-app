@@ -92,10 +92,14 @@
 //     width: 12,5%;
 // }
 
+.unactive{
+    transition: 0.2s all ;
+    opacity: 0;
+}
+
 .hide{
     display: none;
 }
-
 
 @media (max-width:$md1){
     .tabs-button{
