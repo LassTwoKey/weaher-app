@@ -3,20 +3,1273 @@
     <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.min.css?_v=20231210191836">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap&_v=20231210191836" rel="stylesheet">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?_v=20231225011807"
+/>
+    <link rel="stylesheet" href="css/style.min.css?_v=20231225011807">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;600;700&display=swap&_v=20231225011807" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="img/logo.svg">
     <title>Weather App</title>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?_v=20231225011807"></script>
 </head>
     <body>
-        <header>
-    
+        <header class = 'header'>
+            <div class="container">
+                 <div class="header-content">
+                <div class="header-logo">
+                    <img src = 'img/logo.svg'>
+                    <p>Weather app</p>
+                </div>
+                <form class="header-search-input">
+                    <input class = 'search' type="text"    placeholder="Введите город">
+                    <img src = 'img/header/search.svg'>
+                    <p class ='close hide'>x</p>
+                </form>
+                <div class="search-list hide">
+                          <ul>
+                             
+                          </ul>
+                     </div>
+                <div class="header-button">
+                    <button class = 'degree'>°C</button>
+                    <button class = 'fahrenheit'>°F</button>
+                </div>
+            </div>
+        </div>
 </header>
-        <main>
-            
+
+
+        <main class="main">
+            <div class="container widget-wrapper">
+    <div class="widget">
+        <img id="background-url" draggable="false" src="img/widget/sample.svg" />
+        <div class="backdrop"></div>
+        <div class="widget-container">
+            <div class="widget-header">
+                <div class="widget-city-country">
+                    <p id="geo-full-name">Москва, Россия</p>
+                </div>
+            </div>
+            <div class="widget-main">
+                <div class="widget-temperature">
+                    <div class="widget-gradus">
+                        <p id="main-temp">322.22°</p>
+                    </div>
+                    <div class="widget-real-gradus">
+                        <p id="feels-like">Ощущается -322.22°</p>
+                    </div>
+                </div>
+                <div class="widget-weather-icon">
+                    <img id="widget-icon" src="img/widget/sample.svg" style="width: 107px" />
+                    <p id="weather-descr" style="text-align: center;">Облачно</p>
+                </div>
+            </div>
+            <div class="widget-footer">
+                <div class="widget-real-data">
+                    <p id="current-date">Январь 18,18:23</p>
+                </div>
+                <div class="widget-max-and-min-temp">
+                    <p id="max-temp" class="day">День 2°</p>
+                    <p id="min-temp" class="night">Ночь -2°</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="neco-table">
+        <picture><source srcset="img/conten_not_found.webp" type="image/webp"><img draggable="false" src="img/conten_not_found.png" /></picture>
+        <p class="neco-title">Тут ничего пока нет</p>
+        <p class="neco-desc">И не будет.Хе, хотя должна быть карта</p>
+    </div>
+</div>
+
+            <div class="container">
+  <div class="tabs">
+    <div class="tabs-buttons">
+      <button class="tabs-button selected">Сегодня</button>
+      <button class="tabs-button">Завтра</button>
+      <button class="tabs-button">5 дней</button>
+    </div>
+  </div>
+  <div class="content-full-tabs">
+    <div class="tabs-frame-content">
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-speed-air">
+          <img src="img/tabs/air.svg" />
+        </div>
+        <div class="tabs-frame-text wind ">
+          <h4>Ветер</h4>
+          <p id="wind">12,2км/ч</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-clouds">
+          <img src="img/tabs/cloud.svg" />
+        </div>
+        <div class="tabs-frame-text  clouds">
+          <h4>Облачность</h4>
+          <p id="clouds">24 %</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-pressure ">
+          <img src="img/tabs/wave.svg" />
+        </div>
+        <div class="tabs-frame-text pressure">
+          <h4>Давление</h4>
+          <p id="pressure">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-humidity">
+          <img src="img/tabs/humidity.svg" />
+        </div>
+        <div class="tabs-frame-text humidity">
+          <h4>Влажность</h4>
+          <p id="humidity">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+  </div> <div class="hourly-forecast">
+    <div class="hourly-card">
+        <div class="hourly-container">
+            <div class="hourly-title">
+                <img src="img/tabs/timer.svg" />
+                <p>Hourly forecast</p>
+            </div>
+            <div class="slider-container">
+                <div class="swiper">
+                    <div id="today-forecast" class="swiper-wrapper">
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="frame-wrapper">
+  <div class="frame-card">
+    <div class="frame-content">
+      <div class="frame-icon">
+        <img src="img/tabs/nights_stay.svg" />
+      </div>
+      <div class="frame-text">
+        <div class="frame-title">
+          <h4>Восход</h4>
+        </div>
+        <div class="frame-time">
+          <p id="sunrise">4:12</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-period sunrice">
+      <!-- <p>через 4 ч</p> -->
+    </div>
+  </div>
+
+  <div class="frame-card">
+    <div class="frame-content">
+      <div class="frame-icon">
+        <img src="img/tabs/sunset.svg" />
+      </div>
+      <div class="frame-text">
+        <div class="frame-title">
+          <h4>Закат</h4>
+        </div>
+        <div class="frame-time">
+          <p id="sunset">20:12</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-period sunset">
+      <!-- <p>5 ч назад</p> -->
+    </div>
+  </div>
+</div>
+ 
+  </div>
+  <div class="content-full-tabs">
+    <div class="tabs-frame-content">
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-speed-air">
+          <img src="img/tabs/air.svg" />
+        </div>
+        <div class="tabs-frame-text wind ">
+          <h4>Ветер</h4>
+          <p id="wind">12,2км/ч</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-clouds">
+          <img src="img/tabs/cloud.svg" />
+        </div>
+        <div class="tabs-frame-text  clouds">
+          <h4>Облачность</h4>
+          <p id="clouds">24 %</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-pressure ">
+          <img src="img/tabs/wave.svg" />
+        </div>
+        <div class="tabs-frame-text pressure">
+          <h4>Давление</h4>
+          <p id="pressure">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-humidity">
+          <img src="img/tabs/humidity.svg" />
+        </div>
+        <div class="tabs-frame-text humidity">
+          <h4>Влажность</h4>
+          <p id="humidity">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+  </div> <div class="hourly-forecast">
+    <div class="hourly-card">
+        <div class="hourly-container">
+            <div class="hourly-title">
+                <img src="img/tabs/timer.svg" />
+                <p>Hourly forecast</p>
+            </div>
+            <div class="slider-container">
+                <div class="swiper">
+                    <div id="today-forecast" class="swiper-wrapper">
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="frame-wrapper">
+  <div class="frame-card">
+    <div class="frame-content">
+      <div class="frame-icon">
+        <img src="img/tabs/nights_stay.svg" />
+      </div>
+      <div class="frame-text">
+        <div class="frame-title">
+          <h4>Восход</h4>
+        </div>
+        <div class="frame-time">
+          <p id="sunrise">4:12</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-period sunrice">
+      <!-- <p>через 4 ч</p> -->
+    </div>
+  </div>
+
+  <div class="frame-card">
+    <div class="frame-content">
+      <div class="frame-icon">
+        <img src="img/tabs/sunset.svg" />
+      </div>
+      <div class="frame-text">
+        <div class="frame-title">
+          <h4>Закат</h4>
+        </div>
+        <div class="frame-time">
+          <p id="sunset">20:12</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-period sunset">
+      <!-- <p>5 ч назад</p> -->
+    </div>
+  </div>
+</div>
+ 
+  </div>
+   <div class="content-full-tabs">
+     <div class="full-days-card">
+  <div class="five-days-card">
+    <div class="five-days-wrapper">
+      <div class="five-days-data">
+        <h4>Сегодня, 10 декабря</h4>
+        <p>Облачно</p>
+      </div>
+      <div class="five-days-content-weather">
+        <div class="five-days-temperature">
+          <p>2°</p>
+          <p>-2°</p>
+        </div>
+        <div class="five-days-weather-img">
+          <picture><source srcset="img/tabs/cloud-and-sun.webp" type="image/webp"><img src="img/tabs/cloud-and-sun.png" /></picture>
+          <img class="five-days-open active" src="img/five-days/open.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="five-days-content">
+      <div class="five-days-frame"><div class="tabs-frame-content">
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-speed-air">
+          <img src="img/tabs/air.svg" />
+        </div>
+        <div class="tabs-frame-text wind ">
+          <h4>Ветер</h4>
+          <p id="wind">12,2км/ч</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-clouds">
+          <img src="img/tabs/cloud.svg" />
+        </div>
+        <div class="tabs-frame-text  clouds">
+          <h4>Облачность</h4>
+          <p id="clouds">24 %</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-pressure ">
+          <img src="img/tabs/wave.svg" />
+        </div>
+        <div class="tabs-frame-text pressure">
+          <h4>Давление</h4>
+          <p id="pressure">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-humidity">
+          <img src="img/tabs/humidity.svg" />
+        </div>
+        <div class="tabs-frame-text humidity">
+          <h4>Влажность</h4>
+          <p id="humidity">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+  </div></div>
+      <div class="five-days-hourly-forecast">
+        <div class="hourly-forecast">
+    <div class="hourly-card">
+        <div class="hourly-container">
+            <div class="hourly-title">
+                <img src="img/tabs/timer.svg" />
+                <p>Hourly forecast</p>
+            </div>
+            <div class="slider-container">
+                <div class="swiper">
+                    <div id="today-forecast" class="swiper-wrapper">
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="five-days-card">
+    <div class="five-days-wrapper">
+      <div class="five-days-data">
+        <h4>Сегодня, 11 декабря</h4>
+        <p>Облачно и солнечно</p>
+      </div>
+      <div class="five-days-content-weather">
+        <div class="five-days-temperature">
+          <p>2°</p>
+          <p>-2°</p>
+        </div>
+        <div class="five-days-weather-img">
+          <picture><source srcset="img/tabs/cloud-and-sun.webp" type="image/webp"><img src="img/tabs/cloud-and-sun.png" /></picture>
+          <img class="five-days-open active" src="img/five-days/open.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="five-days-content">
+      <div class="five-days-frame"><div class="tabs-frame-content">
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-speed-air">
+          <img src="img/tabs/air.svg" />
+        </div>
+        <div class="tabs-frame-text wind ">
+          <h4>Ветер</h4>
+          <p id="wind">12,2км/ч</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-clouds">
+          <img src="img/tabs/cloud.svg" />
+        </div>
+        <div class="tabs-frame-text  clouds">
+          <h4>Облачность</h4>
+          <p id="clouds">24 %</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-pressure ">
+          <img src="img/tabs/wave.svg" />
+        </div>
+        <div class="tabs-frame-text pressure">
+          <h4>Давление</h4>
+          <p id="pressure">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-humidity">
+          <img src="img/tabs/humidity.svg" />
+        </div>
+        <div class="tabs-frame-text humidity">
+          <h4>Влажность</h4>
+          <p id="humidity">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+  </div></div>
+      <div class="five-days-hourly-forecast">
+        <div class="hourly-forecast">
+    <div class="hourly-card">
+        <div class="hourly-container">
+            <div class="hourly-title">
+                <img src="img/tabs/timer.svg" />
+                <p>Hourly forecast</p>
+            </div>
+            <div class="slider-container">
+                <div class="swiper">
+                    <div id="today-forecast" class="swiper-wrapper">
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="five-days-card">
+    <div class="five-days-wrapper">
+      <div class="five-days-data">
+        <h4>Сегодня, 12 декабря</h4>
+        <p>Облачно</p>
+      </div>
+      <div class="five-days-content-weather">
+        <div class="five-days-temperature">
+          <p>2°</p>
+          <p>-2°</p>
+        </div>
+        <div class="five-days-weather-img">
+          <picture><source srcset="img/tabs/cloud-and-sun.webp" type="image/webp"><img src="img/tabs/cloud-and-sun.png" /></picture>
+          <img class="five-days-open active" src="img/five-days/open.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="five-days-content">
+      <div class="five-days-frame"><div class="tabs-frame-content">
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-speed-air">
+          <img src="img/tabs/air.svg" />
+        </div>
+        <div class="tabs-frame-text wind ">
+          <h4>Ветер</h4>
+          <p id="wind">12,2км/ч</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-clouds">
+          <img src="img/tabs/cloud.svg" />
+        </div>
+        <div class="tabs-frame-text  clouds">
+          <h4>Облачность</h4>
+          <p id="clouds">24 %</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-pressure ">
+          <img src="img/tabs/wave.svg" />
+        </div>
+        <div class="tabs-frame-text pressure">
+          <h4>Давление</h4>
+          <p id="pressure">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-humidity">
+          <img src="img/tabs/humidity.svg" />
+        </div>
+        <div class="tabs-frame-text humidity">
+          <h4>Влажность</h4>
+          <p id="humidity">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+  </div></div>
+      <div class="five-days-hourly-forecast">
+        <div class="hourly-forecast">
+    <div class="hourly-card">
+        <div class="hourly-container">
+            <div class="hourly-title">
+                <img src="img/tabs/timer.svg" />
+                <p>Hourly forecast</p>
+            </div>
+            <div class="slider-container">
+                <div class="swiper">
+                    <div id="today-forecast" class="swiper-wrapper">
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="five-days-card">
+    <div class="five-days-wrapper">
+      <div class="five-days-data">
+        <h4>Сегодня, 13 декабря</h4>
+        <p>Облачно</p>
+      </div>
+      <div class="five-days-content-weather">
+        <div class="five-days-temperature">
+          <p>2°</p>
+          <p>-2°</p>
+        </div>
+        <div class="five-days-weather-img">
+          <picture><source srcset="img/tabs/cloud-and-sun.webp" type="image/webp"><img src="img/tabs/cloud-and-sun.png" /></picture>
+          <img class="five-days-open active" src="img/five-days/open.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="five-days-content">
+      <div class="five-days-frame"><div class="tabs-frame-content">
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-speed-air">
+          <img src="img/tabs/air.svg" />
+        </div>
+        <div class="tabs-frame-text wind ">
+          <h4>Ветер</h4>
+          <p id="wind">12,2км/ч</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-clouds">
+          <img src="img/tabs/cloud.svg" />
+        </div>
+        <div class="tabs-frame-text  clouds">
+          <h4>Облачность</h4>
+          <p id="clouds">24 %</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-pressure ">
+          <img src="img/tabs/wave.svg" />
+        </div>
+        <div class="tabs-frame-text pressure">
+          <h4>Давление</h4>
+          <p id="pressure">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-humidity">
+          <img src="img/tabs/humidity.svg" />
+        </div>
+        <div class="tabs-frame-text humidity">
+          <h4>Влажность</h4>
+          <p id="humidity">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+  </div></div>
+      <div class="five-days-hourly-forecast">
+        <div class="hourly-forecast">
+    <div class="hourly-card">
+        <div class="hourly-container">
+            <div class="hourly-title">
+                <img src="img/tabs/timer.svg" />
+                <p>Hourly forecast</p>
+            </div>
+            <div class="slider-container">
+                <div class="swiper">
+                    <div id="today-forecast" class="swiper-wrapper">
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="five-days-card">
+    <div class="five-days-wrapper">
+      <div class="five-days-data">
+        <h4>Сегодня, 14 декабря</h4>
+        <p>Облачно</p>
+      </div>
+      <div class="five-days-content-weather">
+        <div class="five-days-temperature">
+          <p>2°</p>
+          <p>-2°</p>
+        </div>
+        <div class="five-days-weather-img">
+          <picture><source srcset="img/tabs/cloud-and-sun.webp" type="image/webp"><img src="img/tabs/cloud-and-sun.png" /></picture>
+          <img class="five-days-open active" src="img/five-days/open.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="five-days-content">
+      <div class="five-days-frame"><div class="tabs-frame-content">
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-speed-air">
+          <img src="img/tabs/air.svg" />
+        </div>
+        <div class="tabs-frame-text wind ">
+          <h4>Ветер</h4>
+          <p id="wind">12,2км/ч</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-clouds">
+          <img src="img/tabs/cloud.svg" />
+        </div>
+        <div class="tabs-frame-text  clouds">
+          <h4>Облачность</h4>
+          <p id="clouds">24 %</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-pressure ">
+          <img src="img/tabs/wave.svg" />
+        </div>
+        <div class="tabs-frame-text pressure">
+          <h4>Давление</h4>
+          <p id="pressure">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-humidity">
+          <img src="img/tabs/humidity.svg" />
+        </div>
+        <div class="tabs-frame-text humidity">
+          <h4>Влажность</h4>
+          <p id="humidity">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+  </div></div>
+      <div class="five-days-hourly-forecast">
+        <div class="hourly-forecast">
+    <div class="hourly-card">
+        <div class="hourly-container">
+            <div class="hourly-title">
+                <img src="img/tabs/timer.svg" />
+                <p>Hourly forecast</p>
+            </div>
+            <div class="slider-container">
+                <div class="swiper">
+                    <div id="today-forecast" class="swiper-wrapper">
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="five-days-card">
+    <div class="five-days-wrapper">
+      <div class="five-days-data">
+        <h4>Сегодня, 15 декабря</h4>
+        <p>Облачно</p>
+      </div>
+      <div class="five-days-content-weather">
+        <div class="five-days-temperature">
+          <p>2°</p>
+          <p>-2°</p>
+        </div>
+        <div class="five-days-weather-img">
+          <picture><source srcset="img/tabs/cloud-and-sun.webp" type="image/webp"><img src="img/tabs/cloud-and-sun.png" /></picture>
+          <img class="five-days-open active" src="img/five-days/open.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="five-days-content">
+      <div class="five-days-frame"><div class="tabs-frame-content">
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-speed-air">
+          <img src="img/tabs/air.svg" />
+        </div>
+        <div class="tabs-frame-text wind ">
+          <h4>Ветер</h4>
+          <p id="wind">12,2км/ч</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-clouds">
+          <img src="img/tabs/cloud.svg" />
+        </div>
+        <div class="tabs-frame-text  clouds">
+          <h4>Облачность</h4>
+          <p id="clouds">24 %</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-pressure ">
+          <img src="img/tabs/wave.svg" />
+        </div>
+        <div class="tabs-frame-text pressure">
+          <h4>Давление</h4>
+          <p id="pressure">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+    <div class="frame-card">
+      <div class="content-frame">
+        <div class="tabs-img-humidity">
+          <img src="img/tabs/humidity.svg" />
+        </div>
+        <div class="tabs-frame-text humidity">
+          <h4>Влажность</h4>
+          <p id="humidity">766 мм рт. ст.</p>
+        </div>
+      </div>
+    </div>
+  </div></div>
+      <div class="five-days-hourly-forecast">
+        <div class="hourly-forecast">
+    <div class="hourly-card">
+        <div class="hourly-container">
+            <div class="hourly-title">
+                <img src="img/tabs/timer.svg" />
+                <p>Hourly forecast</p>
+            </div>
+            <div class="slider-container">
+                <div class="swiper">
+                    <div id="today-forecast" class="swiper-wrapper">
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide hourly-forecast-items">
+                            <div class="hourly-forecast-item">
+                                <h4>9:00</h4>
+                                <img src="img/tabs/sun.svg" />
+                                <p>8°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+   </div>
+</div>
+
         </main>
         <footer>
 </footer>
-        <script src="js/app.min.js?_v=20231210191836"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?_v=20231225011807"></script>
+        <script src="js/app.min.js?_v=20231225011807"></script>
     </body>
 </html>
