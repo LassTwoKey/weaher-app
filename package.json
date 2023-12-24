@@ -9,7 +9,12 @@
         "build": "gulp build --build",
         "zip": "gulp deployZIP --build",
         "deploy": "gulp deployFTP --build",
-        "svgSprive": "gulp svgSprive"
+        "fix": "npx prettier --write",
+        "svgSprive": "gulp svgSprive",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "**/*": "npx prettier --write --ignore-unknown"
     },
     "author": "Shelpii",
     "license": "ISC",
@@ -38,6 +43,8 @@
         "gulp-webp-html-nosvg": "latest",
         "gulp-webpcss": "latest",
         "gulp-zip": "latest",
+        "husky": "^8.0.3",
+        "lint-staged": "^15.2.0",
         "sass": "latest",
         "vinyl-ftp": "latest",
         "webp-converter": "2.2.3",
