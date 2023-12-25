@@ -1,87 +1,87 @@
-.tabs{
-    padding:30px 0px;
+.tabs {
+    padding: 30px 0px;
     max-width: 500px;
-      &-buttons{
+    &-buttons {
         display: grid;
-        grid-template-columns:repeat(3,1fr);
-        gap:35px;
-        button{
-            padding:8px 0px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+        button {
+            padding: 8px 0px;
             border-radius: $border;
-            background:$white;
-            color:$mainColor;
+            background: $white;
+            color: $mainColor;
             box-shadow: $boxShadow;
-            &.selected{
-                background: linear-gradient(180deg, #DA728A 0%, #CF61A1 100%);
-                color:$white;
-                transition: .6s;
+            &.selected {
+                background: linear-gradient(180deg, #da728a 0%, #cf61a1 100%);
+                color: $white;
+                transition: 0.6s;
             }
         }
     }
-    &-frame-content{
+    &-frame-content {
         max-width: 500px;
         display: grid;
-        grid-template-columns: repeat(2,1fr);
-         gap:20px;
-         padding-bottom: 30px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding-bottom: 30px;
     }
     &-img-speed-air,
-    &-img-precipitation,
+    &-img-clouds,
     &-img-pressure,
-    &-img-humidity{
-        img{
+    &-img-humidity {
+        img {
             transform: translateY(10px);
         }
     }
 }
 
-.content-frame{
+.content-frame {
     display: flex;
-    gap:12px;
+    gap: 12px;
 }
 
-.frame-card{
+.frame-card {
     background-color: $white;
-    padding:8px 12px;
+    padding: 8px 12px;
     border-radius: 10px;
 }
 
-.hourly{
-    &-card{
-       max-width:500px;
+.hourly {
+    &-card {
+        max-width: 500px;
         height: 146px;
         background-color: $white;
         border-radius: 10px;
     }
-    &-container{
-        padding:13px 15px;
+    &-container {
+        padding: 13px 15px;
         overflow: hidden !important;
     }
-    &-title{
-       display: flex;
-       gap:11px;
-       align-items: center;
-       margin-bottom: 11px;
-       p{
-        font-weight: 600;
-        font-size: 14px;
-       }
+    &-title {
+        display: flex;
+        gap: 11px;
+        align-items: center;
+        margin-bottom: 11px;
+        p {
+            font-weight: 600;
+            font-size: 14px;
+        }
     }
-    &-forecast-item{
+    &-forecast-item {
         display: flex;
         align-items: center;
         flex-direction: column;
-        gap:4px;
+        gap: 4px;
     }
-    }
+}
 
-    .slider-container {
-     overflow: hidden;  
-    }
-      .swiper-slide {
-        display: block;
-        width: 40px;
-      }
+.slider-container {
+    overflow: hidden;
+}
+.swiper-slide {
+    display: block;
+    width: 40px;
+}
 // .swiper-slide:nth-child(2n),
 // .swiper-slide:nth-child(3n),
 // .swiper-slide:nth-child(4n),
@@ -92,48 +92,52 @@
 //     width: 12,5%;
 // }
 
-.unactive{
-    transition: 0.2s all ;
+.unactive {
+    transition: 0.2s all;
     opacity: 0;
 }
 
-.hide{
+.hide {
     display: none;
 }
 
-@media (max-width:$md1){
-    .tabs-button{
-       font-size: 15px;
-       padding:8px 0px;
+.common-text {
+    color: $commonText;
+}
+
+@media (max-width: $md1) {
+    .tabs-button {
+        font-size: 15px;
+        padding: 8px 0px;
     }
-    .tabs-buttons{
-        gap:18px;
+    .tabs-buttons {
+        gap: 18px;
     }
-    .tabs-frame-text{
-        p:first-child{
+    .tabs-frame-text {
+        p:first-child {
             font-size: 14px;
         }
-        p:last-child{
+        p:last-child {
             font-size: 12px;
         }
     }
-    .frame-card{
-        padding:6px 8px;
+    .frame-card {
+        padding: 6px 8px;
     }
-    .hourly-title{
-        h4{
+    .hourly-title {
+        h4 {
             font-size: 14px;
         }
-        img{
-            width:17px;
+        img {
+            width: 17px;
         }
     }
     .tabs-img-humidity,
     .tabs-img-speed-air,
     .tabs-img-pressure,
-    .tabs-img-precipitation{
-        img{
-            width:17px;
+    .tabs-img-clouds {
+        img {
+            width: 17px;
         }
     }
 }

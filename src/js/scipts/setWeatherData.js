@@ -1,74 +1,60 @@
+import {
+    getFormattedDate,
+    firstLetterUpperCase,
+    getWindDirection,
+    formatUnixTimeTo24HourTimeString,
+    hPaToMmHg,
+    formatTime,
+} from './utils.js'
 
-export async function updateWeather(city){
-    const weathers = await getWeatherByCity(city);
-    const a = new Date();
-    const hours = a.getHours();
-    const sunrice = weathers.sys.sunrise;
-    const sunset = weathers.sys.sunset;
-    const sunriceHours = Math.floor((sunrice / (1000 * 60 * 60) % 24));
-    const sunsetHours = Math.floor((sunset / (1000 * 60 * 60) % 24));
-    const gradusAndCalvine = 273.15;
-    const weatherIconAndText = document.querySelector('.widget-weather-icon')
-    document.querySelector('.widget-city-country').innerHTML = ` 
-    <p>${weathers.name} </p>`
-   document.querySelector('.widget-gradus').innerHTML = `
-     <p>${Math.floor(weathers.main.temp - gradusAndCalvine)}°</p> 
-   `
-   document.querySelector('.widget-real-gradus').innerHTML  = `
-     <p>Ощущается ${Math.floor(weathers.main.feels_like - gradusAndCalvine)}°</p> 
-   `
-   weathers.weather.forEach(item =>{
-      weatherIconAndText.innerHTML = `
-       <img src ="http://openweathermap.org/img/w/${item.icon}.png" style = "width:107px">
-       <p>${item.main}</p> 
-      `
-   })
-   document.querySelector('.widget-real-data').innerHTML = `
-    ${getTime()}
-   `
-   document.querySelector('.day').innerHTML = `
-   <p>День ${Math.floor(weathers.main.temp_max - gradusAndCalvine)}°</p>
-  `
-   document.querySelector('.night').innerHTML = `
-  <p>Ночь ${Math.floor(weathers.main.temp_min - gradusAndCalvine)}°</p>
- `
- document.querySelector('.wind p ').innerHTML = `
-   <p>${weathers.wind.speed}км/ч</p>
- `
- document.querySelector('.humidity p').innerHTML = `
-   <p>${weathers.main.humidity}%</p>
- `
+export function setWeatherData({ weatherByCity, ForecastByCoord }) {
+    console.log({ weatherByCity, ForecastByCoord })
 
- document.querySelector('.pressure p').innerHTML = `
- <p>${weathers.main.pressure} мм рт.ст</p>
-`
+    appStore.timezone = weatherByCity.timezone
 
-  document.querySelectorAll('.frame-time p').forEach(item =>{
-    item.innerHTML = `
-     <p>${hours}:${getZero(a.getMinutes())}</p> 
-    `
- })
+    appStore.weatherInfo.city.geoFullName = `${weatherByCity.name}, ${weatherByCity.sys.country}`
+    appStore.weatherInfo.city.name = weatherByCity.name
+    appStore.weatherInfo.city.lat = weatherByCity.coord.lat
+    appStore.weatherInfo.city.lot = weatherByCity.coord.lot
 
-  document.querySelector('.sunrice').innerHTML =`
-   <p>через ${hours - sunriceHours} ч</p>
-  `
+    appStore.weatherInfo.widget = {
+        feelsLike: weatherByCity.main.feels_like,
+        temp: weatherByCity.main.temp,
+        tempMax: weatherByCity.main.temp_max,
+        tempMin: weatherByCity.main.temp_min,
+        currentDate: getFormattedDate(),
+        main: weatherByCity.weather[0].main,
+        description: firstLetterUpperCase(weatherByCity.weather[0].description),
+        iconUrl: `https://openweathermap.org/img/wn/${weatherByCity.weather[0].icon}@2x.png`,
+        backgroundUrl: `img/widget/${weatherByCity.weather[0].main}.jpg`,
+    }
 
-  document.querySelector('.sunset').innerHTML = `
-   <p> через ${hours - sunsetHours}ч </p>
-  `
+    appStore.weatherInfo.main = {
+        windSpeed: weatherByCity.wind.speed,
+        windDirection: getWindDirection(weatherByCity.wind.deg),
+        clouds: weatherByCity.clouds.all,
+        pressure: hPaToMmHg(weatherByCity.main.pressure),
+        humidity: weatherByCity.main.humidity,
+        sunrise: formatUnixTimeTo24HourTimeString(
+            weatherByCity.sys.sunrise,
+            appStore.timezone,
+        ),
+        sunset: formatUnixTimeTo24HourTimeString(
+            weatherByCity.sys.sunset,
+            appStore.timezone,
+        ),
+    }
 
-}
-
-
-
-
-
-
-
-
-
-
- export function setWeatherData({weatherByCity,ForecastByCoord}){
-    appStore.weatherInfo.city.geoFullName = `${weatherByCity.name}, ${weatherByCity.sys.country}`;
-      
+    appStore.weatherInfo.forecast.list = ForecastByCoord.list.map(
+        (forecastElem) => ({
+            time: formatTime(forecastElem.dt_txt),
+            iconUrl: `https://openweathermap.org/img/wn/${forecastElem.weather[0].icon}@2x.png`,
+            temp: forecastElem.main.temp,
+            windSpeed: forecastElem.wind.speed,
+            windDirection: getWindDirection(weatherByCity.wind.deg),
+            clouds: forecastElem.clouds.all,
+            pressure: hPaToMmHg(forecastElem.main.pressure),
+            humidity: forecastElem.main.humidity,
+        }),
+    )
 }
