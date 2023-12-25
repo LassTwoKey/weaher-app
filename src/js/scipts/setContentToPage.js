@@ -53,8 +53,14 @@ export function setContentToPage() {
     const cloudsTomorrow = document.querySelector('#tomorrow-tab #clouds')
     const pressureTomorrow = document.querySelector('#tomorrow-tab #pressure')
     const humidityTomorrow = document.querySelector('#tomorrow-tab #humidity')
-    const sunriseTomorrow = document.querySelector('#tomorrow-tab #sunrise')
-    const sunsetTomorrow = document.querySelector('#tomorrow-tab #sunset')
+   
+    ;(windTomorrow.innerHTML = getWindString(
+        appStore.weatherInfo.tomorrow.windSpeed,
+        appStore.weatherInfo.tomorrow.windDirection,
+    )),
+        (cloudsTomorrow.innerHTML = `${appStore.weatherInfo.tomorrow.clouds}%`)
+    pressureTomorrow.innerHTML = `${appStore.weatherInfo.tomorrow.pressure} мм рт. ст.`
+    humidityTomorrow.innerHTML = `${appStore.weatherInfo.tomorrow.humidity}%`
 
     // Forecast
     setForecast()

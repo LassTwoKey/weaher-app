@@ -1,3 +1,4 @@
+import { appStore } from './store.js'
 import {
     getFormattedDate,
     firstLetterUpperCase,
@@ -57,4 +58,23 @@ export function setWeatherData({ weatherByCity, ForecastByCoord }) {
             humidity: forecastElem.main.humidity,
         }),
     )
+    console.log(appStore.weatherInfo.forecast.list)
+    appStore.weatherInfo.forecast.list.find(forecastElem =>{
+     return  forecastElem.time === '12:00'
+    })
+    const findedTomorrowInfo = appStore.weatherInfo.forecast.list.find(forecastElem => forecastElem.time === '12:00')
+    if(findedTomorrowInfo){
+    appStore.weatherInfo.tomorrow = findedTomorrowInfo;
+  }
+  const indexes = []
+
+    appStore.weatherInfo.forecast.list.forEach((x, i) => {
+    if ( x.time === '0:00') {
+      indexes.push(i)
+    }
+  })
+  
+   appStore.weatherInfo.tomorrow.list =  appStore.weatherInfo.forecast.list.slice(indexes[0], indexes[1])
+   
 }
+ 
