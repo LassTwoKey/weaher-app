@@ -9,7 +9,7 @@
         "build": "gulp build --build",
         "zip": "gulp deployZIP --build",
         "deploy": "gulp deployFTP --build",
-        "fix": "npx prettier --write",
+        "fix": "npx prettier --write .",
         "svgSprive": "gulp svgSprive",
         "prepare": "husky install"
     },

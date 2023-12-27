@@ -1,49 +1,48 @@
-
-.full-days-card{
+.full-days-card {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.five-days{
-    &-card{
+.five-days {
+    &-card {
         background-color: $white;
         max-width: 500px;
         border-radius: 10px;
     }
-    &-data{
-        p{
-           color:$commonText;
+    &-data {
+        p {
+            color: $commonText;
         }
     }
 
-    &-wrapper{
+    &-wrapper {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 18px 9px;
     }
-    &-content-weather{
+    &-content-weather {
         display: flex;
         align-items: center;
-        gap:20px;
-        padding-right:10px;
+        gap: 20px;
+        padding-right: 10px;
     }
-    &-temperature{
+    &-temperature {
         display: flex;
         align-items: center;
         flex-direction: column;
     }
-    &-open{ 
+    &-open {
         transform: translateX(5px);
     }
 }
 
-.active{
+.active {
     transform: rotate(178deg);
 }
 
-@media (max-width:$md1){
-    .five-days-data{
+@media (max-width: $md1) {
+    .five-days-data {
         font-size: 14px;
     }
 }

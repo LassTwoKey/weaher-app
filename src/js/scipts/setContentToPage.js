@@ -20,10 +20,10 @@ export function setContentToPage() {
     )}°`
     weatherDescr.innerHTML = appStore.weatherInfo.widget.description
     currentDate.innerHTML = appStore.weatherInfo.widget.currentDate
-    maxTemp.innerHTML = `День ${Math.round(
+    maxTemp.innerHTML = `Макс ${Math.round(
         appStore.weatherInfo.widget.tempMax,
     )}°`
-    minTemp.innerHTML = `Ночь ${Math.round(
+    minTemp.innerHTML = `Мин ${Math.round(
         appStore.weatherInfo.widget.tempMin,
     )}°`
     widgetIcon.src = appStore.weatherInfo.widget.iconUrl

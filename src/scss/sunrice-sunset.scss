@@ -1,57 +1,57 @@
-.frame{
-  &-card{
-    background-color: $white;
-    max-height: 65px;
-  }
-  &-wrapper{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    flex:1 1 auto;
-    gap:20px;
-    max-width: 500px;
-    padding-top:30px;
-  }
-  &-content{
-    display: flex;
-    align-items: center;
-    gap:11px;
-}
-&-time{
-    p{
-        font-size: 14px;
-        font-weight: 600;
-        color:$commonText;
+.frame {
+    &-card {
+        background-color: $white;
+        max-height: 65px;
     }
-}
-  &-period{
-    display: flex;
-   justify-content: flex-end;
-    p{
-        font-size: 12px;
-        transform: translateY(-10px);
-        color:$commonText;
+    &-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        flex: 1 1 auto;
+        gap: 20px;
+        max-width: 500px;
+        padding-top: 30px;
     }
-  }
+    &-content {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+    }
+    &-time {
+        p {
+            font-size: 14px;
+            font-weight: 600;
+            color: $commonText;
+        }
+    }
+    &-period {
+        display: flex;
+        justify-content: flex-end;
+        p {
+            font-size: 12px;
+            transform: translateY(-10px);
+            color: $commonText;
+        }
+    }
 }
 
-@media (max-width:$md1){
-    .frame-time{
-       p{
-        font-size: 12px;
-       }
+@media (max-width: $md1) {
+    .frame-time {
+        p {
+            font-size: 12px;
+        }
     }
-    .frame-title{
-        p{
+    .frame-title {
+        p {
             font-size: 14px;
         }
     }
-    .frame-icon{
-        img{
-            width:17px;
+    .frame-icon {
+        img {
+            width: 17px;
         }
     }
-    .frame-period{
-        p{
+    .frame-period {
+        p {
             font-size: 12px;
         }
     }

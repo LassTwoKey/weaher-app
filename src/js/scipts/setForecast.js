@@ -110,7 +110,7 @@ function getDayCard(cardInfo, idx) {
                 <p>${Math.round(tempMin)}°</p>
             </div>
             <div class="five-days-weather-img">
-                <img style="width: 85px" src="${iconUrl}" />
+                <img style="width: 70px" src="${iconUrl}" />
                 <img class="five-days-open active" src="img/five-days/open.svg" />
             </div>
         </div>

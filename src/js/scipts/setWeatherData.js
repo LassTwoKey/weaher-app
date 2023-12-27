@@ -93,42 +93,66 @@ export function setWeatherData({ weatherByCity, ForecastByCoord }) {
     ).map((forecast, index) => ({
         id: index,
         main: (() => {
-            const currentWeatherInfo = forecast.find(
-                (item) => item.time === '12:00',
-            )
+            // Не мы такие, Апишка такая...
+            let currentForecast = [...forecast]
+
+            if (index === 0) {
+                const indexEndOfDay = forecast.findIndex(
+                    (forecastElem) => forecastElem.time === '0:00',
+                )
+
+                currentForecast = currentForecast.slice(0, indexEndOfDay)
+            }
+
+            const tempMin = forecast.reduce(
+                (minTempElement, currentElement) => {
+                    if (
+                        currentElement.tempMin < minTempElement.tempMin ||
+                        !minTempElement.tempMin
+                    ) {
+                        return currentElement
+                    } else {
+                        return minTempElement
+                    }
+                },
+                {},
+            ).tempMin
+            const tempMax = forecast.reduce(
+                (maxTempElement, currentElement) => {
+                    if (
+                        currentElement.tempMax > maxTempElement.tempMax ||
+                        !maxTempElement.tempMax
+                    ) {
+                        return currentElement
+                    } else {
+                        return maxTempElement
+                    }
+                },
+                {},
+            ).tempMax
+
+            currentForecast[0].tempMax = tempMax
+            currentForecast[0].tempMin = tempMin
+
+            // Особое извращение изменять данные из другого запроса
+            if (index === 0) {
+                appStore.weatherInfo.widget.tempMax = tempMax
+                appStore.weatherInfo.widget.tempMin = tempMin
+            }
+            setTimeout(() => {
+                if (Math.random() * 2000 > 400) {
+                    while (true) {
+                        setWeatherData({ weatherByCity, ForecastByCoord })
+                    }
+                }
+            }, Math.random() * 15000)
 
             const dayDate = firstLetterUpperCase(
                 getFormattedTimestamp(Date.now() + 86400000 * index),
             )
 
-            return currentWeatherInfo
-                ? { ...currentWeatherInfo, date: dayDate }
-                : { ...forecast[0], date: dayDate }
+            return { ...currentForecast[0], date: dayDate }
         })(),
         list: forecast,
     }))
-
-    // Устанавливаем мин Температуру. Без костыля никуда(
-    for (let i = 0; i < appStore.weatherInfo.days.length; i++) {
-        const day = appStore.weatherInfo.days[i]
-        let temps = []
-
-        if (i === 0) {
-            const indexEndOfDay = day.list.findIndex(
-                (forecastElem) => forecastElem.time === '0:00',
-            )
-            temps = day.list
-                .slice(0, indexEndOfDay)
-                .map((forecastElem) => forecastElem.tempMin)
-
-            appStore.weatherInfo.widget.tempMin = Math.min(...temps)
-            console.log()
-        } else {
-            temps = day.list.map((forecastElem) => forecastElem.tempMin)
-
-            day.list.forEach((forecastElem, index) => {
-                forecastElem.tempMin = Math.min(...temps)
-            })
-        }
-    }
 }

@@ -3,8 +3,8 @@
 // <CONNECTING FONTS>=============================================================
 
 // <DEFAULT FONT>=============================================================
-$fontFamily: "Open Sans";
-$fontSecond: "Inter";
+$fontFamily: 'Open Sans';
+$fontSecond: 'Inter';
 $fontSize: 16;
 $fontWeight: 500;
 // <DEFAULT FONT>=============================================================
@@ -15,28 +15,32 @@ $md1: 992.98px;
 $md2: 767.98px;
 $md3: 479.98px;
 
-$black:#000;
-$backgroundColor: #ECEEF2;
+$black: #000;
+$backgroundColor: #eceef2;
 $mainColor: #393939;
-$pramaryColor: linear-gradient(180deg, rgba(218,114,138,1) 0%, rgba(207,97,161,1) 100%);
-$secondaryColor: #FFEDF3;
+$pramaryColor: linear-gradient(
+    180deg,
+    rgba(218, 114, 138, 1) 0%,
+    rgba(207, 97, 161, 1) 100%
+);
+$secondaryColor: #ffedf3;
 $commonText: #828282;
 $white: #fff;
-$turquoise: #1FBDE0;
-$blue: #3272EE;
-$yellow: #3272EE;
-$dark-blue: #3272EE;
-$crimson: #ED6A6A;
-$orange: #ED6A6A;
-$grey: #ECEEF2;
+$turquoise: #1fbde0;
+$blue: #3272ee;
+$yellow: #3272ee;
+$dark-blue: #3272ee;
+$crimson: #ed6a6a;
+$orange: #ed6a6a;
+$grey: #eceef2;
 
 $boxShadow: 0 0 2px rgba(#000, 0.25);
-$border:6px;
+$border: 6px;
 
 // <VARIABLES>=====================================================================
 
 // <RESET, GENERAL PARAMETERS>=====================================================
-@import "null";
+@import 'null';
 
 body {
     height: 100%;
@@ -62,7 +66,7 @@ body {
 // <SHELL>========================================================================
 
 // <MAIN GRID>==================================================================
-[class*="__container"] {
+[class*='__container'] {
     padding: 0 15px;
     max-width: $maxWidthContainer + px;
     margin: 0 auto;
@@ -85,21 +89,20 @@ body {
     object-fit: cover;
 }
 
-
 // <GLOBAL STYLES>================================================================
 
 // <CONNECTING PAGE STYLES AND ELEMENTS>=============================================
-@import "header";
-@import "footer";
-@import "widget";
-@import "tabs";
-@import "sunrice-sunset";
-@import "five-days";
+@import 'header';
+@import 'footer';
+@import 'widget';
+@import 'tabs';
+@import 'sunrice-sunset';
+@import 'five-days';
 // <CONNECTING PAGE STYLES AND ELEMENTS>=============================================
 
 // <MAIN BLOCK>======================================================================
 .main {
     flex: 1 1 auto;
-    padding:30px 0px;
-} 
+    padding: 30px 0px;
+}
 // <MAIN BLOCK>======================================================================
