@@ -1,5 +1,5 @@
 import { getWindString } from './utils.js'
-import { setForecast } from './setForecast.js'
+import { setForecast, setFiveDaysForecast } from './setForecast.js'
 
 export function setContentToPage() {
     // Widget
@@ -38,11 +38,11 @@ export function setContentToPage() {
     const sunriseToday = document.querySelector('#today-tab #sunrise')
     const sunsetToday = document.querySelector('#today-tab #sunset')
 
-    ;(windToday.innerHTML = getWindString(
+    windToday.innerHTML = getWindString(
         appStore.weatherInfo.main.windSpeed,
         appStore.weatherInfo.main.windDirection,
-    )),
-        (cloudsToday.innerHTML = `${appStore.weatherInfo.main.clouds}%`)
+    )
+    cloudsToday.innerHTML = `${appStore.weatherInfo.main.clouds}%`
     pressureToday.innerHTML = `${appStore.weatherInfo.main.pressure} мм рт. ст.`
     humidityToday.innerHTML = `${appStore.weatherInfo.main.humidity}%`
     sunriseToday.innerHTML = appStore.weatherInfo.main.sunrise
@@ -53,14 +53,17 @@ export function setContentToPage() {
     const cloudsTomorrow = document.querySelector('#tomorrow-tab #clouds')
     const pressureTomorrow = document.querySelector('#tomorrow-tab #pressure')
     const humidityTomorrow = document.querySelector('#tomorrow-tab #humidity')
-   
-    ;(windTomorrow.innerHTML = getWindString(
+
+    windTomorrow.innerHTML = getWindString(
         appStore.weatherInfo.tomorrow.windSpeed,
         appStore.weatherInfo.tomorrow.windDirection,
-    )),
-        (cloudsTomorrow.innerHTML = `${appStore.weatherInfo.tomorrow.clouds}%`)
+    )
+    cloudsTomorrow.innerHTML = `${appStore.weatherInfo.tomorrow.clouds}%`
     pressureTomorrow.innerHTML = `${appStore.weatherInfo.tomorrow.pressure} мм рт. ст.`
     humidityTomorrow.innerHTML = `${appStore.weatherInfo.tomorrow.humidity}%`
+
+    // Five days' forecast
+    setFiveDaysForecast()
 
     // Forecast
     setForecast()

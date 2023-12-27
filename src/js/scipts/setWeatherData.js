@@ -1,4 +1,3 @@
-import { appStore } from './store.js'
 import {
     getFormattedDate,
     firstLetterUpperCase,
@@ -6,6 +5,8 @@ import {
     formatUnixTimeTo24HourTimeString,
     hPaToMmHg,
     formatTime,
+    splitForecastsForFiveDays,
+    getFormattedTimestamp,
 } from './utils.js'
 
 export function setWeatherData({ weatherByCity, ForecastByCoord }) {
@@ -47,7 +48,8 @@ export function setWeatherData({ weatherByCity, ForecastByCoord }) {
     }
 
     appStore.weatherInfo.forecast.list = ForecastByCoord.list.map(
-        (forecastElem) => ({
+        (forecastElem, index) => ({
+            id: index,
             time: formatTime(forecastElem.dt_txt),
             iconUrl: `https://openweathermap.org/img/wn/${forecastElem.weather[0].icon}@2x.png`,
             temp: forecastElem.main.temp,
@@ -56,25 +58,77 @@ export function setWeatherData({ weatherByCity, ForecastByCoord }) {
             clouds: forecastElem.clouds.all,
             pressure: hPaToMmHg(forecastElem.main.pressure),
             humidity: forecastElem.main.humidity,
+            tempMax: forecastElem.main.temp_max,
+            tempMin: forecastElem.main.temp_min,
+            // date: firstLetterUpperCase(
+            //     getFormattedUnixTimestamp(forecastElem.dt)
+            // ),
+            description: firstLetterUpperCase(
+                forecastElem.weather[0].description,
+            ),
         }),
     )
-    console.log(appStore.weatherInfo.forecast.list)
-    appStore.weatherInfo.forecast.list.find(forecastElem =>{
-     return  forecastElem.time === '12:00'
-    })
-    const findedTomorrowInfo = appStore.weatherInfo.forecast.list.find(forecastElem => forecastElem.time === '12:00')
-    if(findedTomorrowInfo){
-    appStore.weatherInfo.tomorrow = findedTomorrowInfo;
-  }
-  const indexes = []
+
+    const findedTomorrowInfo = appStore.weatherInfo.forecast.list.find(
+        (forecastElem) => forecastElem.time === '12:00',
+    )
+
+    if (findedTomorrowInfo) {
+        appStore.weatherInfo.tomorrow = findedTomorrowInfo
+    }
+    const indexes = []
 
     appStore.weatherInfo.forecast.list.forEach((x, i) => {
-    if ( x.time === '0:00') {
-      indexes.push(i)
+        if (x.time === '0:00') {
+            indexes.push(i)
+        }
+    })
+
+    appStore.weatherInfo.tomorrow.list =
+        appStore.weatherInfo.forecast.list.slice(indexes[0], indexes[1])
+    appStore.weatherInfo.tomorrow.list
+
+    appStore.weatherInfo.days = splitForecastsForFiveDays(
+        appStore.weatherInfo.forecast.list,
+    ).map((forecast, index) => ({
+        id: index,
+        main: (() => {
+            const currentWeatherInfo = forecast.find(
+                (item) => item.time === '12:00',
+            )
+
+            const dayDate = firstLetterUpperCase(
+                getFormattedTimestamp(Date.now() + 86400000 * index),
+            )
+
+            return currentWeatherInfo
+                ? { ...currentWeatherInfo, date: dayDate }
+                : { ...forecast[0], date: dayDate }
+        })(),
+        list: forecast,
+    }))
+
+    // Устанавливаем мин Температуру. Без костыля никуда(
+    for (let i = 0; i < appStore.weatherInfo.days.length; i++) {
+        const day = appStore.weatherInfo.days[i]
+        let temps = []
+
+        if (i === 0) {
+            const indexEndOfDay = day.list.findIndex(
+                (forecastElem) => forecastElem.time === '0:00',
+            )
+            temps = day.list
+                .slice(0, indexEndOfDay)
+                .map((forecastElem) => forecastElem.tempMin)
+
+            appStore.weatherInfo.widget.tempMin = Math.min(...temps)
+            console.log()
+        } else {
+            temps = day.list.map((forecastElem) => forecastElem.tempMin)
+
+            day.list.forEach((forecastElem, index) => {
+                forecastElem.tempMin = Math.min(...temps)
+            })
+        }
     }
-  })
-  
-   appStore.weatherInfo.tomorrow.list =  appStore.weatherInfo.forecast.list.slice(indexes[0], indexes[1])
-   
 }
- 

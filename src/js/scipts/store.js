@@ -39,6 +39,7 @@ export const appStore = {
             humidity: null,
             list: [],
         },
+        days: [],
         forecast: {
             list: [],
         },

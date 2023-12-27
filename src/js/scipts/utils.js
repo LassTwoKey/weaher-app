@@ -102,6 +102,7 @@ export function formatUnixTimeTo24HourTimeString(unixTime, timezoneOffset) {
 }
 
 export function firstLetterUpperCase(string) {
+    if (!string) return ''
     return string[0].toUpperCase() + string.slice(1)
 }
 
@@ -157,5 +158,96 @@ export function getGeo() {
         lat: localStorage.getItem('lat'),
         lon: localStorage.getItem('lon'),
         name: localStorage.getItem('name'),
+    }
+}
+
+// Костыльное дробление по дням, просьба исправить на более читаемый😁)))
+export function splitForecastsForFiveDays(weatherData) {
+    function groupByTime(data) {
+        const groupedData = {}
+
+        data.forEach((entry) => {
+            const time = entry.time
+            if (!groupedData[time]) {
+                groupedData[time] = []
+            }
+            groupedData[time].push(entry)
+        })
+
+        return groupedData
+    }
+
+    const sortedWeatherData = [...weatherData].sort((a, b) => {
+        // Сортировка по времени
+        const timeA = a.time
+            .split(':')
+            .map(Number)
+            .reduce((acc, val) => acc * 60 + val, 0)
+        const timeB = b.time
+            .split(':')
+            .map(Number)
+            .reduce((acc, val) => acc * 60 + val, 0)
+        return timeA - timeB
+    })
+
+    const groupedData = groupByTime(sortedWeatherData)
+
+    const dataAtMidnightIds = groupedData['0:00'].map((data) => data.id) || []
+
+    const daysForecast = []
+
+    for (let i = 0; i < dataAtMidnightIds.length; i++) {
+        const midnightId = dataAtMidnightIds[i]
+
+        switch (i) {
+            case 0:
+                daysForecast.push(weatherData.slice(0, 8))
+                daysForecast.push(
+                    weatherData.slice(midnightId, dataAtMidnightIds[i + 1]),
+                )
+                break
+            case dataAtMidnightIds.length - 1:
+                daysForecast.push(weatherData.slice(midnightId))
+                break
+            default:
+                daysForecast.push(
+                    weatherData.slice(midnightId, dataAtMidnightIds[i + 1]),
+                )
+                break
+        }
+    }
+
+    return daysForecast.slice(0, 5)
+}
+
+export function getFormattedTimestamp(timestamp) {
+    const currentDate = new Date()
+    const inputDate = new Date(timestamp)
+
+    const options = {
+        day: 'numeric',
+        month: 'long',
+    }
+
+    if (
+        inputDate.getDate() === currentDate.getDate() &&
+        inputDate.getMonth() === currentDate.getMonth() &&
+        inputDate.getFullYear() === currentDate.getFullYear()
+    ) {
+        // Сегодня
+        return `Сегодня, ${inputDate.toLocaleDateString('ru-RU', options)}`
+    } else if (
+        inputDate.getDate() === currentDate.getDate() + 1 &&
+        inputDate.getMonth() === currentDate.getMonth() &&
+        inputDate.getFullYear() === currentDate.getFullYear()
+    ) {
+        // Завтра
+        return `Завтра, ${inputDate.toLocaleDateString('ru-RU', options)}`
+    } else {
+        // День недели
+        return `${inputDate.toLocaleDateString('ru-RU', {
+            ...options,
+            weekday: 'long',
+        })}`
     }
 }
